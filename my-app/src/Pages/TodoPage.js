@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { Card } from "../Components/Card/card";
 import { Form } from "../Components/Form/form";
-import { Time } from "../Components/Time/time";
+
+
+
+
 export const TodoPage =  ()=>{
 
     const [todo, setTodo] = useState([])
@@ -23,7 +26,8 @@ export const TodoPage =  ()=>{
         fetch('api/create', {
             method: "POST",
             body: JSON.stringify({
-                content:addTodo
+                content:addTodo,
+                done:false
             }),
             headers: {
                 "Content-Type": "application/json; charset=UTF-8"

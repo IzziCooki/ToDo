@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://127.0.0.1:5000/",
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
     "@reach/menu-button": "^0.14.0",
     "@szhsin/react-menu": "^1.9.0",
     "@testing-library/jest-dom": "^5.11.4",

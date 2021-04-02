@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import Chip from '@material-ui/core/Chip';
 
 export const Card = ({ listOfTodos })=>{
 
@@ -9,9 +10,10 @@ export const Card = ({ listOfTodos })=>{
             var id = todo.id;
             return (
             <ul key={todo.id}>
-                <li>       
+                <li> 
                    <Link to={todo.id.toString()}>{todo.content} 
                    </Link> 
+
                 </li>
             </ul>
                 )

@@ -1,5 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+
 
 export const Delete = ( {id} ) => {
     let history = useHistory();
@@ -19,7 +21,8 @@ export const Delete = ( {id} ) => {
 
     return ( 
         <>
-        <button onClick={deleteTodo}>Delete</button>
+
+        <Button variant="contained" color="secondary" onClick={deleteTodo}>Delete</Button>
         </>
     )
 }

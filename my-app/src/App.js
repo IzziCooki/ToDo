@@ -1,8 +1,9 @@
 import './App.css';
 import React from 'react'
 import { TodoPage } from "./Pages/TodoPage"
-import { Show } from './Pages/Show'
-import { Edit } from "./Pages/EditPage"
+import { Show } from './Pages/Show';
+import {Date} from './Pages/timePage'
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -22,8 +23,8 @@ function App() {
           <Route path='/:id'>
           <Show/>
           </Route>
-          <Route path="/edit/:id">
-            <Edit/>
+          <Route path='/date/:id'>
+            <Show/>
           </Route>
         </Switch>
       </Router>
