@@ -7,7 +7,7 @@ import { EditForm } from "../Components/Form/editForm";
 export const Show = () => {
     const { id } = useParams()
     const [todo, setTodo] = useState([])
-    const [newTodo, setNewTodo] = useState('')
+    const [addTodo, setAddTodo] = useState('')
     
     
     useEffect(()=>  {
@@ -17,21 +17,19 @@ export const Show = () => {
     }, [id])
 
     const content = todo.length > 0 && todo.map(data => data.content)
+    const done = todo.length > 0 && todo.map(data => data.done)
 
     // Gets the data and sets to variable content 
     //{todo.length > 0 && todo.map(data => <div key={id}>{data.content}</div>)}
 
-    const handleFormChange = (userInput) => {
-        setNewTodo(userInput)
-    }
-
 
     return( 
         <div>
-
             <EditForm id={id} content={content}/>
             <hr></hr>
             <Delete id={id}/>
+            <hr></hr>
+            
             <hr></hr>
             <div>
             <Link to={"/"}>Back To Todos</Link>

@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, json
+from flask import Flask, jsonify, request, json, flash
 from flask_sqlalchemy import SQLAlchemy
 from time import gmtime, strftime
 import requests
@@ -6,6 +6,7 @@ import requests
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///example.db"
+app.secret_key = "super secret key"
 db = SQLAlchemy(app)
 
 
@@ -13,11 +14,13 @@ db = SQLAlchemy(app)
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=False)
+    #done = db.Column(db.Boolean, nullable=False)
  
     #time = db.Column(db.DateTime, nullable)
 
     def str(self):
         return f'{self.id}, {self.content}'
+
 
 def todo_serializer(todo):
     return {
@@ -53,10 +56,20 @@ def delete(id):
 @app.route('/api/edit/<int:id>', methods=['POST'])
 def edit(id):
     request_data = json.loads(request.data)
-    todo = Todo.query.filter_by(id=request_data["id"])
-    print(todo.context)
-    #todo.content == request_data.content
-    #db.session.commit()
+    if len(*request_data.values()) > 0:
+        # * unpacks the data into a clean string
+        
+        
+        #print(list(request_data.values()))
+        todo = Todo.query.filter_by(id=id).first()
+    
+        todo.content =str(*request_data.values())
+    #print(todo.content)
+        db.session.commit()
+        flash('Todo Updated')
+        return {'201': 'Todo successfully updated'}
+    else:
+        return ('No Data in Form')
 
 @app.route('/api/time')
 def get_current_time():
@@ -67,6 +80,20 @@ def get_current_time():
 
 
 
+@app.route('/api/v2/create', methods=["POST"])
+def createV2():
+    request_data = json.loads(request.data)
+    todo = TodoV2(content=request_data["content"], done=False)
+    db.session.add(todo)
+    db.session.commit()
+    return('Hi')
+
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+    
